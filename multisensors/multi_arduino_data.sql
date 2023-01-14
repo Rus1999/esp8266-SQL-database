@@ -1,0 +1,43 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+CREATE DATABASE IF NOT EXISTS `multi_arduino_data` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `multi_arduino_data`;
+
+CREATE TABLE `device` (
+  `id_device` int(11) NOT NULL,
+  `name_device` varchar(28) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `device_data` (
+  `id_data` int(5) NOT NULL,
+  `temp` double DEFAULT NULL,
+  `humidity` double DEFAULT NULL,
+  `day` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `id_device` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+ALTER TABLE `device`
+  ADD PRIMARY KEY (`id_device`);
+
+ALTER TABLE `device_data`
+  ADD PRIMARY KEY (`id_data`);
+
+
+ALTER TABLE `device`
+  MODIFY `id_device` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `device_data`
+  MODIFY `id_data` int(5) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
